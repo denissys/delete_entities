@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: delete-entities
+Version: 0.1.0
+Summary: Deletes entities from Datastore
+Home-page: https://github.com/[your-username]/delete-entities
+Author: Denis Santos
+Author-email: denissys@gmail.com
+License: MIT
+Requires-Python: >=3.8
