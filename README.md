@@ -41,7 +41,7 @@ This command will retry the operation up to 100 times if an error occurs.
 
 To run the tests, use the following command:
 
-`python -m unittest tests/test_delete_entities.py`
+`python3 -m unittest tests/test_delete_entities.py`
 
 
 This command will run the unit tests for the project.
