@@ -23,7 +23,7 @@ class TestMainFunction(unittest.TestCase):
         MockDatastoreClient.return_value = self.mock_datastore_client
         self.mock_datastore_client.query.return_value = self.mock_query
 
-        main()
+        main('Card', 'country', 'BR', 100)
 
         # Assertions to check if the methods were called correctly
         MockDatastoreClient.assert_called_once()
@@ -36,7 +36,7 @@ class TestMainFunction(unittest.TestCase):
         MockDatastoreClient.side_effect = Exception("Test exception")
 
         with self.assertLogs() as log_cm:
-            main()
+            main('Card', 'country', 'BR', 100)
 
         # Check if the log contains the error message
         self.assertIn('ERROR:root:Erro: Test exception. Attempt 1 of 100', log_cm.output[0])
@@ -48,7 +48,7 @@ class TestMainFunction(unittest.TestCase):
         MockDatastoreClient.side_effect = Exception("Test exception")
 
         with self.assertLogs() as log_cm:
-            main()
+            main('Card', 'country', 'BR', 100)
 
         self.assertIn("Maximum number of attempts reached!", log_cm.output[-1])
 

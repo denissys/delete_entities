@@ -1,9 +1,10 @@
 import google.cloud.datastore
 import logging
+import argparse
 
 logging.basicConfig(level=logging.INFO)
 
-def main():
+def main(kind_value, param_name, param_value, max_retries):
 
     """
     Deletes all cards from the Datastore with the country of Brazil.
@@ -41,8 +42,8 @@ def main():
             Returns:
                 A Datastore query
             """
-            query = datastore.query(kind='Card')
-            query.add_filter("country", "=", "BR")
+            query = datastore.query(kind=kind_value)
+            query.add_filter(param_name, "=", param_value)
 
             """
             Iterates over the entities and deletes them.
@@ -118,4 +119,12 @@ def main():
         logging.error("Maximum number of attempts reached!")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Delete entities from Google Cloud Datastore.")
+    parser.add_argument("--kind_value", required=True, help="Kind of the entity in Datastore.")
+    parser.add_argument("--param_name", required=True, help="Field name to filter on.")
+    parser.add_argument("--param_value", required=True, help="Value of the field to filter on.")
+    parser.add_argument("--max_retries", type=int, default=100, help="Maximum number of retries.")
+
+    args = parser.parse_args()
+
+    main(args.kind_value, args.param_name, args.param_value, args.max_retries)
