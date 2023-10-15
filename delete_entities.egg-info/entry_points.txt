@@ -1,2 +1,0 @@
-[console_scripts]
-delete-entities = delete_entities.main:main
