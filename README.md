@@ -16,7 +16,7 @@ This project deletes all entities from the Datastore with the specified kind and
 
 To install the project, run the following command:
 
-`python3 setup.py sdist`
+`python setup.py sdist`
 
 
 ## Setting up the environment
@@ -26,13 +26,13 @@ To set up the environment, run the following command in the terminal:
 ### Usage
 To delete all entities from the Datastore with the kind of "Card" and the country of "BR", you can use the following command:
 
-`python3 delete_entities/main.py --kind_value Card --param_name country --param_value BR`
+`python delete_entities/main.py --kind_value Card --param_name country --param_value BR`
 
 This command will delete all entities with the kind of "Card" and the country of "BR".
 
 To specify a different maximum number of retries, you can use the --max_retries argument. For example, to retry the operation 100 times, you can use the following command:
 
-`python3 delete_entities/main.py --kind_value Card --param_name country --param_value BR --max_retries 100`
+`python delete_entities/main.py --kind_value Card --param_name country --param_value BR --max_retries 100`
 
 
 This command will retry the operation up to 100 times if an error occurs.
@@ -41,7 +41,7 @@ This command will retry the operation up to 100 times if an error occurs.
 
 To run the tests, use the following command:
 
-`python3 -m unittest tests/test_delete_entities.py`
+`python -m unittest tests/test_delete_entities.py`
 
 
 This command will run the unit tests for the project.
