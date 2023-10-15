@@ -39,7 +39,8 @@ class TestMainFunction(unittest.TestCase):
             main('Card', 'country', 'BR', 100)
 
         # Check if the log contains the error message
-        self.assertIn('ERROR:root:Erro: Test exception. Attempt 1 of 100', log_cm.output[0])
+        self.assertIn('ERROR:root:Error: Test exception. Attempt 1 of 100', log_cm.output[0])
+
 
 
     @patch('delete_entities.main.google.cloud.datastore.Client')

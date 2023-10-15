@@ -5,117 +5,51 @@ import argparse
 logging.basicConfig(level=logging.INFO)
 
 def main(kind_value, param_name, param_value, max_retries):
-
     """
-    Deletes all cards from the Datastore with the country of Brazil.
+    Deletes all entities of a specific kind from the Datastore based on the provided filter.
 
     Args:
-        None
+        kind_value (str): The kind of the entity in Datastore.
+        param_name (str): The field name to filter on.
+        param_value (str): The value of the field to filter on.
+        max_retries (int): The maximum number of retries.
 
     Returns:
         None
     """
 
     count = 0
-    max_retries = 100
     retries = 1
 
-    while retries < max_retries:
+    while retries <= max_retries:
         try:
-            """
-            Initializes the Datastore client.
-
-            Args:
-                None
-
-            Returns:
-                A Google Cloud Datastore client
-            """
+            # Initializes the Datastore client.
             datastore = google.cloud.datastore.Client()
 
-            """
-            Queries for all cards with the country of Brazil.
-
-            Args:
-                None
-
-            Returns:
-                A Datastore query
-            """
+            # Queries for entities based on provided kind and filter.
             query = datastore.query(kind=kind_value)
             query.add_filter(param_name, "=", param_value)
 
-            """
-            Iterates over the entities and deletes them.
-
-            Args:
-                entity: A Datastore entity
-
-            Returns:
-                None
-            """
+            # Iterates over the entities and deletes them.
             for entity in query.fetch():
-                """
-                Print the entity for debugging purposes.
-
-                Args:
-                    entity: A Datastore entity
-
-                Returns:
-                    None
-                """
+                # Uncomment the next line to print the entity for debugging purposes.
                 #print(entity)
 
-                """
-                Deletes the entity.
-
-                Args:
-                    entity: A Datastore entity
-
-                Returns:
-                    None
-                """
+                # Deletes the entity.
                 datastore.delete(entity.key)
                 count += 1
 
                 if count % 1000 == 0:
-                    logging.info("%s deleted", str(e), count)
+                    logging.info("%d entities deleted so far", count)
 
-            """
-            Breaks out of the loop if everything went well.
-
-            Args:
-                None
-
-            Returns:
-                None
-            """
+            # Breaks out of the loop if everything went well.
             break
 
         except Exception as e:
-            """
-            Print the error and retry.
-
-            Args:
-                e: The exception
-
-            Returns:
-                None
-            """
-            logging.error("Erro: %s. Attempt %d of %d", str(e), retries, max_retries)
-
+            logging.error("Error: %s. Attempt %d of %d", str(e), retries, max_retries)
             retries += 1
 
     else:
-        """
-        Print an error message if the maximum number of retries was reached.
-
-        Args:
-            None
-
-        Returns:
-            None
-        """
         logging.error("Maximum number of attempts reached!")
 
 if __name__ == "__main__":
