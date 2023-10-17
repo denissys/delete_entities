@@ -4,7 +4,7 @@ setup(
     name="delete-entities",
     version="0.1.0",
     description="Deletes entities from Datastore",
-    url="https://github.com/[your-username]/delete-entities",
+    url="https://github.com/denissys/delete_entities",
     author="Denis Santos",
     author_email="denissys@gmail.com",
     license="MIT",
