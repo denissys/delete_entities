@@ -1,6 +1,7 @@
 # Delete entities from Datastore
 
 This project deletes all entities from the Datastore with the specified kind and filter.
+* About Google Datastore: https://cloud.google.com/datastore
 
 ## Requirements
 
